@@ -16,11 +16,11 @@ import com.example.testapp.models.PostsModelList
 import com.example.testapp.screens.PostsScreen
 import com.example.testapp.screens.UsersScreen
 import com.example.testapp.ui.theme.TestAppTheme
-import com.example.testapp.viewModel.ViewModel
+import com.example.testapp.viewModel.CustomViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        val model = ViewModel()
+        val model = CustomViewModel()
         model.getUserNews()
         model.getPost()
 

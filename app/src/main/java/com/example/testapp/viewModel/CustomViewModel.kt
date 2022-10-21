@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class ViewModel : ViewModel() {
+class CustomViewModel : ViewModel() {
     private var newsService = RetrofitServer()
 
     private val _userNewsState: MutableStateFlow<UserModelList> = MutableStateFlow(
