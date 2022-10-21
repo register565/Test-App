@@ -25,11 +25,11 @@ import kotlinx.coroutines.flow.StateFlow
 
 
 @Composable
-fun postsScreen(
+fun PostsScreen(
     userState: StateFlow<UserModelList>,
     userNews: MutableState<PostsModelList>
 ) {
-    val User = userState.collectAsState()
+    val user = userState.collectAsState()
     val userList = userNews.value.userList
 
     Column {
@@ -38,7 +38,7 @@ fun postsScreen(
             modifier = Modifier.fillMaxWidth()
         ) {
             AsyncImage(
-                model = User.value.userList.first { it.userId == userList.first().userId }.url,
+                model = user.value.userList.first { it.userId == userList.first().userId }.url,
                 contentDescription = "Contact profile picture",
                 modifier = Modifier
                     .size(200.dp),
@@ -47,10 +47,9 @@ fun postsScreen(
             )
         }
         LazyColumn {
-            item { }
             items(userList.size) { content ->
                 val currentNews = userList[content]
-                userNews(
+                UserNews(
                     title = currentNews.title,
                     body = currentNews.body
                 )
@@ -60,7 +59,7 @@ fun postsScreen(
 }
 
 @Composable
-fun userNews(
+fun UserNews(
     title: String,
     body: String,
 ) {
@@ -89,7 +88,7 @@ fun userNews(
                     textAlign = TextAlign.Center,
                     fontStyle = FontStyle.Italic
                 )
-                Spacer(modifier = Modifier.padding(top = 20.dp))
+                Spacer(modifier = Modifier.size(20.dp))
                 Text(text = body, color = Color.Black, textAlign = TextAlign.Center)
             }
         }

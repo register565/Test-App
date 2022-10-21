@@ -1,4 +1,4 @@
-package com.example.testapp.repo
+package com.example.testapp.repository
 
 import com.example.testapp.models.PostsModel
 import com.example.testapp.models.UserModel

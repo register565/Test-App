@@ -29,30 +29,29 @@ import com.example.testapp.models.PostsModelList
 import com.example.testapp.models.UserModelList
 import kotlinx.coroutines.flow.StateFlow
 
-
 @SuppressLint("StateFlowValueCalledInComposition")
 @Composable
-fun usersScreen(
+fun UsersScreen(
     usersCardState: StateFlow<UserModelList>,
     userPostState: StateFlow<PostsModelList>,
     navController: NavHostController,
     currentUserNews: MutableState<PostsModelList>
 ) {
-    val Users = usersCardState.collectAsState()
-    val Posts = userPostState.collectAsState()
+    val users = usersCardState.collectAsState()
+    val posts = userPostState.collectAsState()
 
     LazyColumn {
-        items(Users.value.userList.size) { content ->
-            userCard(
-                userId = Users.value.userList[content].userId,
-                url = Users.value.userList[content].thumbnailUrl,
-                name = Users.value.userList[content].name,
-                Posts,
+        items(users.value.userList.size) { content ->
+            UserCard(
+                userId = users.value.userList[content].userId,
+                url = users.value.userList[content].thumbnailUrl,
+                name = users.value.userList[content].name,
+                posts,
                 click = {
                     navController.navigate("postsScreen")
                     currentUserNews.value = PostsModelList(
-                        Posts.value.userList.filter {
-                            it.userId == Users.value.userList[content].userId
+                        posts.value.userList.filter {
+                            it.userId == users.value.userList[content].userId
                         }
                     )
                 }
@@ -61,18 +60,18 @@ fun usersScreen(
     }
 }
 
-fun postsCount(Posts: State<PostsModelList>, id: Int): Int {
-    var q = 0
-    for (i in Posts.value.userList) {
+fun calculatePostCount(posts: State<PostsModelList>, id: Int): Int {
+    var count = 0
+    for (i in posts.value.userList) {
         if (id == i.userId) {
-            q++
+            count++
         }
     }
-    return q
+    return count
 }
 
 @Composable
-fun userCard(
+fun UserCard(
     userId: Int,
     url: String,
     name: String,
@@ -122,7 +121,7 @@ fun userCard(
 
                 Spacer(modifier = Modifier.padding(top = 10.dp))
                 Text(
-                    text = "<Posts count : ${postsCount(Posts, userId)}>",
+                    text = "<Posts count : ${calculatePostCount(Posts, userId)}>",
                     color = Color.Black,
                     textAlign = TextAlign.Center,
                     fontSize = 20.sp,

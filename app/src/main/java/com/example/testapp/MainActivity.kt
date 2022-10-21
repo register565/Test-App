@@ -13,14 +13,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.testapp.models.PostsModelList
-import com.example.testapp.repo.Repo
-import com.example.testapp.screens.postsScreen
-import com.example.testapp.screens.usersScreen
+import com.example.testapp.screens.PostsScreen
+import com.example.testapp.screens.UsersScreen
 import com.example.testapp.ui.theme.TestAppTheme
+import com.example.testapp.viewModel.ViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        val model = Repo()
+        val model = ViewModel()
         model.getUserNews()
         model.getPost()
 
@@ -38,7 +38,7 @@ class MainActivity : ComponentActivity() {
 
                     NavHost(navController, startDestination = "usersScreen") {
                         composable("usersScreen", content = {
-                            usersScreen(
+                            UsersScreen(
                                 model.userNewsState,
                                 model.postState,
                                 navController,
@@ -46,7 +46,7 @@ class MainActivity : ComponentActivity() {
                             )
                         })
                         composable("postsScreen", content = {
-                            postsScreen(
+                            PostsScreen(
                                 model.userNewsState,
                                 currentUserNewsForDisplaying
                             )

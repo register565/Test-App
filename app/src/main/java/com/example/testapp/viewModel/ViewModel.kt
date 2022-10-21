@@ -1,18 +1,19 @@
-package com.example.testapp.repo
+package com.example.testapp.viewModel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.testapp.models.PostsModelList
 import com.example.testapp.models.UserModelList
+import com.example.testapp.repository.RetrofitServer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class Repo : ViewModel() {
-    var newsService = Server()
+class ViewModel : ViewModel() {
+    private var newsService = RetrofitServer()
 
     private val _userNewsState: MutableStateFlow<UserModelList> = MutableStateFlow(
         UserModelList(listOf())

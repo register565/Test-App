@@ -1,4 +1,4 @@
-package com.example.testapp.repo
+package com.example.testapp.repository
 
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -7,7 +7,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class Server {
+class RetrofitServer {
     fun retrofit(): APIService {
         val logging = HttpLoggingInterceptor()
         logging.setLevel(HttpLoggingInterceptor.Level.BODY)
